@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Glidebase Login</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background: linear-gradient(to top, #e0f0ff, #ffffff);
+    }
+    img.logo {
+      width: 300px;
+      margin-top: 30px;
+    }
+    .box {
+      margin: 20px auto;
+      width: 300px;
+      padding: 20px;
+      border-radius: 10px;
+      background: #f8f8f8;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input {
+      width: 90%;
+      margin: 8px 0;
+      padding: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="glidebase.png" alt="Glidebase Logo" class="logo">
+  <h2>Login / Registrieren</h2>
+
+  <div class="box">
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Passwort" required><br>
+    <button onclick="signIn()">Login</button>
+    <button onclick="signUp()">Registrieren</button>
+    <p id="status"></p>
+  </div>
+
+  <script>
+    // 🔧 Deine Supabase-Daten hier einfügen:
+    const supabaseUrl = 'https://DEIN_PROJECT.supabase.co';
+    const supabaseKey = 'DEIN_ANON_KEY';
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+    async function signIn() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      document.getElementById("status").textContent = error ? "❌ " + error.message : "✅ Eingeloggt!";
+    }
+
+    async function signUp() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const { error } = await supabase.auth.signUp({ email, password });
+      document.getElementById("status").textContent = error ? "❌ " + error.message : "✅ Registriert! Bitte Mail bestätigen.";
+    }
+  </script>
+</body>
+</html>
