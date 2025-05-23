@@ -151,9 +151,6 @@
             });
 
             if (error) {
-<!DOCTYPE html>
-<html lang="de">
-<head>
   <meta charset="UTF-8">
   <title>Glidebase Login</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
